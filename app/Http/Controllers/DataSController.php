@@ -24,6 +24,7 @@ class DataSController extends Controller
     public function create()
     {
         //
+
     }
 
     /**
@@ -34,8 +35,25 @@ class DataSController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        dd(Input::all());
+       // dd(Input::all());
+        echo "holapost"." ";
+        $aRequest = json_decode(file_get_contents('php://input'));
+        print_r($aRequest);
+        //echo $aRequest[0]->nombre_fruta;
+        //var_dump($aRequest[0]->nombre_fruta);
+        /*for($i=0; $i < count($aRequest) ;$i++){
+            $nombre_fruta = $aRequest[$i]->nombre_fruta;
+            $cantidad = $aRequest[$i]->cantidad;
+            echo $nombre_fruta." ".$cantidad;
+            echo "";
+        }*/
+        $fichero=fopen('test3.log','w+');
+        if($fichero == false) {
+            die("No se ha podido crear el archivo.");
+        }
+        fwrite($fichero,json_encode($aRequest));
+        fclose($fichero);
+
     }
 
     /**
